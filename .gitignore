@@ -1,0 +1,6 @@
+﻿# Harbor / local run artifacts
+jobs/
+**/__pycache__/
+*.pyc
+.venv/
+.env
