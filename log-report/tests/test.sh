@@ -1,6 +1,7 @@
 #!/bin/bash
+# Deps (pytest, pytest-json-ctrf) are already in the environment image.
+# Do not use `set -e` here: a failing pytest must still write reward.txt.
 
-# pytest is baked into the environment image (environment/Dockerfile).
 mkdir -p /logs/verifier
 
 pytest /tests/test_outputs.py -rA --ctrf /logs/verifier/ctrf.json

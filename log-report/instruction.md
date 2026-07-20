@@ -1,15 +1,15 @@
-There is an Apache-style access log at `/app/access.log`. Parse it and write a
-JSON summary report to `/app/report.json`.
+Parse the Apache-style access log at `/app/access.log` and write a JSON
+summary to `/app/report.json`.
 
-The report must be a JSON object with these three keys:
+`/app/report.json` must be a single JSON object with exactly these keys:
 
-- `total_requests` (integer): the number of non-empty log lines in the file.
-- `unique_ips` (integer): the number of distinct client IP addresses (the
-  first whitespace-separated field of each log line).
-- `top_path` (string): the request path (e.g. `/index.html`) that appears
-  most often, parsed from the quoted request line (e.g.
-  `"GET /index.html HTTP/1.1"`). If multiple paths are tied for the highest
-  count, any one of them is acceptable.
+- `total_requests` (integer): count of non-empty lines in `/app/access.log`.
+- `unique_ips` (integer): count of distinct client IPs. The client IP is the
+  first whitespace-separated field on each log line.
+- `top_path` (string): the request path that appears most often. Extract the
+  path from the quoted request (for example, from `"GET /index.html HTTP/1.1"`
+  the path is `/index.html`). If two or more paths tie for the highest count,
+  any one of the tied paths is acceptable.
 
 ## Success criteria
 

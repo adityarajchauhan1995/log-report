@@ -1,26 +1,32 @@
-# dynamo/log-report — fixed Terminal-Bench 2 (Harbor) task
+# dynamo/log-report (Harbor / Terminal-Bench 2)
 
-Repaired Harbor task for the Project Dynamo "Fix the Broken Terminal-Bench Task" exercise.
+Ground-up repair of the broken Project Dynamo `log-report` task.
 
-## Layout
+## Task layout
 
 ```
-log-report/xxxxxx
+log-report/
+├── task.toml
+├── instruction.md
+├── environment/
+│   ├── Dockerfile
+│   └── access.log
+├── solution/
+│   ├── solve.sh
+│   └── solve.py
+└── tests/
+    ├── test.sh
+    └── test_outputs.py
 ```
 
-1. `task.toml` — `artifacts` is an array pointing at `/app/report.json`
-2. `environment/Dockerfile` — base image pinned by `@sha256` digest
-3. Removed `environment/solution_hint.py` (leaked reference solution)
-4. Verifier checks real report values (not just file existence)
-5. `tests/test.sh` writes reward/ctrf under `/logs/verifier/`
-6. `instruction.md` has numbered success criteria matching the verifier
+Removed from the agent image build context: `environment/solution_hint.py`
+(leaked reference implementation).
 
-
-
-## Verify locallyx
+## Local checks
 
 ```bash
 harbor run -p log-report -a oracle      # expect reward 1.0
 harbor run -p log-report --agent nop    # expect reward 0.0
 ```
 
+Keep this repository public until the assessment is marked passed, then make it private.
